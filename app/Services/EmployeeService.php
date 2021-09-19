@@ -25,10 +25,10 @@ class EmployeeService
 
     public function saveEmployee($inputData, $imageFile)
     {
-        $imageFileName = 'image_'.time().'.'.$imageFile->getClientOriginalExtension();
-
-        if($imageFile->move('image-files', $imageFileName))
-        {
+        $imageFileName = time().'.'.$imageFile->getClientOriginalExtension();
+        $destination_path= '/public/images';
+        if ($imageFile){
+            $inputData['image_path'] = $imageFile->storeAs($destination_path, $imageFileName);
             $dataSaved = $this->model->create($inputData);
             if ($dataSaved){
                 return [
@@ -36,8 +36,8 @@ class EmployeeService
                     'message' => 'Employee created successfully',
                 ];
             }
-        } else
-        {
+        }else{
+            $dataSaved = $this->model->create($inputData);
             return [
                 'status' => 404,
                 'message' => 'File not uploaded',
@@ -66,17 +66,12 @@ class EmployeeService
     public function updateEmployee($inputData, $id, $imageFile)
     {
         $employee = $this->model->findOrFail($id);
-        $fileUploaded = '';
 
+        $destination_path= '/public/images';
+        $imageFileName = time().'.'.$imageFile->getClientOriginalExtension();
         if ($imageFile){
-            $imageFileName = 'cv_'.time().'.'.$imageFile->getClientOriginalExtension();
-            $fileUploaded = $imageFile->move('cv-files', $imageFileName);
-        }
-
-        if ($fileUploaded)
-        {
+            $inputData['image_path'] = $imageFile->storeAs($destination_path, $imageFileName);
             $dataSaved = $employee->update($inputData);
-
             if ($dataSaved){
                 return [
                     'status' => 200,
@@ -93,6 +88,7 @@ class EmployeeService
                 ];
             }
         }
+
     }
 
 }
