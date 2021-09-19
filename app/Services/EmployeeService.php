@@ -18,6 +18,11 @@ class EmployeeService
         return $this->model->paginate(10);
     }
 
+    public function showTrashEmployees()
+    {
+        return $this->model->onlyTrashed()->paginate(10);
+    }
+
     public function saveEmployee($inputData, $imageFile)
     {
         $imageFileName = 'image_'.time().'.'.$imageFile->getClientOriginalExtension();

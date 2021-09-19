@@ -33,8 +33,14 @@ Route::get('/employees', function () {
     return view('crud.users.all-employee');
 })->name('employee');
 
+Route::get('/soft-delete-employees', function () {
+    return view('crud.users.trash-employee');
+})->name('employee');
+
 Route::resource('employee', EmployeeController::class);
 Route::post('/employee-update/{id}', [EmployeeController::class, 'updateEmployee'])
     ->name('update.employee');
+Route::get('/trash-employee', [EmployeeController::class, 'trashEmployee'])
+    ->name('trash.employee');
 
 require __DIR__.'/auth.php';

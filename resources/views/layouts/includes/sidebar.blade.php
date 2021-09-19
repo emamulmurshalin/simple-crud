@@ -15,6 +15,10 @@
                 <a href="/employees" class="nav-link"><i
                         class="flaticon-user"></i><span>Employees</span></a>
             </li>
+            <li class="nav-item">
+                <a href="/soft-delete-employees" class="nav-link"><i
+                        class="flaticon-user"></i><span>Trashed Employees</span></a>
+            </li>
 
         </ul>
     </div>

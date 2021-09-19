@@ -25,6 +25,10 @@ Vue.component(
     require('./Crud/Components/Views/Testing/EmployeListView').default
 );
 Vue.component(
+    'trash-employee',
+    require('./Crud/Components/Views/Testing/SoftDeleteEmployeListView').default
+);
+Vue.component(
     'employee-add-edit-modal',
     require('./Crud/Components/Views/Testing/EmployeAddEditModal').default
 );

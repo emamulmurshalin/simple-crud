@@ -117,4 +117,9 @@ class EmployeeController extends Controller
         }
         return $this->service->updateEmployee($request->all(), $id, $imageFile);
     }
+
+    public function trashEmployee()
+    {
+        return $this->service->showTrashEmployees();
+    }
 }

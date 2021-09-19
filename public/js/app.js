@@ -2644,6 +2644,227 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'UsaUserListView',
+  data: function data() {
+    return {
+      isModalActive: false,
+      isConfirmationModal: false,
+      addTrialTimeModal: false,
+      selectedUrl: '',
+      deletedId: null,
+      employeeData: {},
+      totalData: '',
+      dataLoaded: true,
+      columns: [{
+        label: 'Name',
+        field: 'name'
+      }, {
+        label: 'Email',
+        field: 'email',
+        type: 'number',
+        sortable: false
+      }, {
+        label: 'Image',
+        field: 'image_path',
+        type: 'file',
+        sortable: false
+      }, {
+        label: 'Gender',
+        field: 'gender'
+      }, {
+        label: 'Skills',
+        field: 'skills'
+      }, {
+        label: 'Action',
+        field: 'action',
+        sortable: false
+      }],
+      searchOption: {
+        enabled: true,
+        trigger: 'enter',
+        skipDiacritics: true,
+        placeholder: 'Search this table'
+      },
+      pagination: {
+        enabled: true,
+        mode: 'records',
+        perPage: 10,
+        position: 'bottom',
+        perPageDropdown: [5, 10, 15],
+        dropdownAllowAll: false,
+        setCurrentPage: 1,
+        nextLabel: 'next',
+        prevLabel: 'prev',
+        rowsPerPageLabel: 'Rows per page',
+        ofLabel: 'of',
+        pageLabel: 'page',
+        // for 'pages' mode
+        allLabel: 'All',
+        infoFn: function infoFn(params) {
+          return "my own page ".concat(params.firstRecordOnPage);
+        }
+      },
+      sortOption: {
+        enabled: true,
+        initialSortBy: {
+          field: 'name',
+          type: 'asc'
+        }
+      }
+    };
+  },
+  methods: {
+    getAction: function getAction(rowData, actionType) {
+      //console.log(rowData, actionType, 'row data');
+      if (actionType == 'delete') {
+        this.deletedId = rowData.id;
+        this.isConfirmationModal = true;
+      } else if (actionType == 'edit') {
+        this.selectedUrl = "employee/".concat(rowData.id);
+        this.isModalActive = true;
+        setTimeout(function () {
+          $('#user-modal').modal('show');
+        });
+      }
+    },
+    onSearch: function onSearch(search) {// console.log(search, 'search data');
+    },
+    onPageChange: function onPageChange(page) {// console.log(page, 'page change');
+    },
+    onSortChange: function onSortChange(sort) {// console.log(sort, 'sort column');
+    },
+    onColumnFilter: function onColumnFilter(filter) {
+      console.log(filter, 'filter data');
+    },
+    openModal: function openModal() {
+      this.isModalActive = true;
+      setTimeout(function () {
+        $('#user-modal').modal('show');
+      });
+    },
+    closeModal: function closeModal() {
+      this.selectedUrl = "";
+      this.isModalActive = false;
+      $('#user-modal').modal('hide');
+      this.getEmployees();
+    },
+    closeModalTrialModal: function closeModalTrialModal() {
+      this.selectedUrl = "";
+      this.addTrialTimeModal = false;
+      $('#trial-time-modal').modal('hide');
+    },
+    confirmed: function confirmed() {
+      var _this = this;
+
+      this.axios["delete"]("employee/".concat(this.deletedId)).then(function (response) {
+        if (response.status == 200) {
+          _this.$toast.success(response.data.message);
+
+          _this.isConfirmationModal = false;
+
+          _this.getEmployees();
+        }
+      })["catch"](function () {
+        _this.isConfirmationModal = false;
+      });
+    },
+    cancelled: function cancelled() {
+      this.isConfirmationModal = false;
+      this.deletedId = null;
+    },
+    getEmployees: function getEmployees() {
+      var _this2 = this;
+
+      this.axios.get('/trash-employee').then(function (response) {
+        _this2.totalData = response.data.total;
+        _this2.employeeData = response.data.data;
+      })["catch"](function () {});
+    }
+  },
+  mounted: function mounted() {
+    this.getEmployees();
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -2680,6 +2901,7 @@ vue__WEBPACK_IMPORTED_MODULE_7__["default"].use(vue_good_table__WEBPACK_IMPORTED
 vue__WEBPACK_IMPORTED_MODULE_7__["default"].component('app-confirmation-modal', __webpack_require__(/*! ./Crud/Components/Helpers/ConfirmationModal */ "./resources/js/Crud/Components/Helpers/ConfirmationModal.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_7__["default"].component('admin-user-dashboard', __webpack_require__(/*! ./Crud/Components/Views/Dashboard/Dashboard */ "./resources/js/Crud/Components/Views/Dashboard/Dashboard.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_7__["default"].component('all-employee', __webpack_require__(/*! ./Crud/Components/Views/Testing/EmployeListView */ "./resources/js/Crud/Components/Views/Testing/EmployeListView.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_7__["default"].component('trash-employee', __webpack_require__(/*! ./Crud/Components/Views/Testing/SoftDeleteEmployeListView */ "./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_7__["default"].component('employee-add-edit-modal', __webpack_require__(/*! ./Crud/Components/Views/Testing/EmployeAddEditModal */ "./resources/js/Crud/Components/Views/Testing/EmployeAddEditModal.vue")["default"]);
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"];
 window.Form = vform__WEBPACK_IMPORTED_MODULE_2__["default"];
@@ -2792,6 +3014,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.dropdown-toggle[data-v-9e4379f8]::after{\n    display: none !important;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=style&index=0&id=1951a7cf&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=style&index=0&id=1951a7cf&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.dropdown-toggle[data-v-1951a7cf]::after{\n    display: none !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20383,6 +20629,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=style&index=0&id=1951a7cf&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=style&index=0&id=1951a7cf&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SoftDeleteEmployeListView_vue_vue_type_style_index_0_id_1951a7cf_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SoftDeleteEmployeListView.vue?vue&type=style&index=0&id=1951a7cf&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=style&index=0&id=1951a7cf&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SoftDeleteEmployeListView_vue_vue_type_style_index_0_id_1951a7cf_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SoftDeleteEmployeListView_vue_vue_type_style_index_0_id_1951a7cf_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -34136,6 +34412,47 @@ component.options.__file = "resources/js/Crud/Components/Views/Testing/EmployeLi
 
 /***/ }),
 
+/***/ "./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SoftDeleteEmployeListView_vue_vue_type_template_id_1951a7cf_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SoftDeleteEmployeListView.vue?vue&type=template&id=1951a7cf&scoped=true& */ "./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=template&id=1951a7cf&scoped=true&");
+/* harmony import */ var _SoftDeleteEmployeListView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SoftDeleteEmployeListView.vue?vue&type=script&lang=js& */ "./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=script&lang=js&");
+/* harmony import */ var _SoftDeleteEmployeListView_vue_vue_type_style_index_0_id_1951a7cf_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SoftDeleteEmployeListView.vue?vue&type=style&index=0&id=1951a7cf&scoped=true&lang=css& */ "./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=style&index=0&id=1951a7cf&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _SoftDeleteEmployeListView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SoftDeleteEmployeListView_vue_vue_type_template_id_1951a7cf_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SoftDeleteEmployeListView_vue_vue_type_template_id_1951a7cf_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "1951a7cf",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Crud/Components/Helpers/ConfirmationModal.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************!*\
   !*** ./resources/js/Crud/Components/Helpers/ConfirmationModal.vue?vue&type=script&lang=js& ***!
@@ -34200,6 +34517,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SoftDeleteEmployeListView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SoftDeleteEmployeListView.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SoftDeleteEmployeListView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/Crud/Components/Views/Testing/EmployeListView.vue?vue&type=style&index=0&id=9e4379f8&scoped=true&lang=css&":
 /*!*********************************************************************************************************************************!*\
   !*** ./resources/js/Crud/Components/Views/Testing/EmployeListView.vue?vue&type=style&index=0&id=9e4379f8&scoped=true&lang=css& ***!
@@ -34209,6 +34542,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeListView_vue_vue_type_style_index_0_id_9e4379f8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EmployeListView.vue?vue&type=style&index=0&id=9e4379f8&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/EmployeListView.vue?vue&type=style&index=0&id=9e4379f8&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=style&index=0&id=1951a7cf&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************!*\
+  !*** ./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=style&index=0&id=1951a7cf&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SoftDeleteEmployeListView_vue_vue_type_style_index_0_id_1951a7cf_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SoftDeleteEmployeListView.vue?vue&type=style&index=0&id=1951a7cf&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=style&index=0&id=1951a7cf&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -34277,6 +34623,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeListView_vue_vue_type_template_id_9e4379f8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeListView_vue_vue_type_template_id_9e4379f8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EmployeListView.vue?vue&type=template&id=9e4379f8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/EmployeListView.vue?vue&type=template&id=9e4379f8&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=template&id=1951a7cf&scoped=true&":
+/*!*****************************************************************************************************************************!*\
+  !*** ./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=template&id=1951a7cf&scoped=true& ***!
+  \*****************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SoftDeleteEmployeListView_vue_vue_type_template_id_1951a7cf_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SoftDeleteEmployeListView_vue_vue_type_template_id_1951a7cf_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SoftDeleteEmployeListView_vue_vue_type_template_id_1951a7cf_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SoftDeleteEmployeListView.vue?vue&type=template&id=1951a7cf&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=template&id=1951a7cf&scoped=true&");
 
 
 /***/ }),
@@ -35319,6 +35682,218 @@ var staticRenderFns = [
       [
         _c("h3", { staticClass: "header smaller lighter blue" }, [
           _vm._v("Employe List View")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "clearfix" }, [
+          _c("div", { staticClass: "pull-right tableTools-container" })
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=template&id=1951a7cf&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Crud/Components/Views/Testing/SoftDeleteEmployeListView.vue?vue&type=template&id=1951a7cf&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.dataLoaded
+    ? _c(
+        "div",
+        [
+          _c(
+            "div",
+            { staticClass: "row", staticStyle: { "margin-left": "0px" } },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-xl-2 col-sm-2 col-md-2",
+                  staticStyle: { float: "right" }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      staticStyle: { float: "right", "font-size": "16px" },
+                      attrs: { "data-toggle": "modal" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.openModal.apply(null, arguments)
+                        }
+                      }
+                    },
+                    [_vm._v("\n                Add new\n            ")]
+                  )
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("vue-good-table", {
+            attrs: {
+              columns: _vm.columns,
+              rows: _vm.employeeData,
+              "pagination-options": _vm.pagination,
+              "search-options": _vm.searchOption,
+              "sort-options": _vm.sortOption,
+              totalRows: _vm.totalData
+            },
+            on: {
+              "on-search": _vm.onSearch,
+              "on-page-change": _vm.onPageChange,
+              "on-per-page-change": _vm.onPageChange,
+              "on-sort-change": _vm.onSortChange,
+              "on-column-filter": _vm.onColumnFilter
+            },
+            scopedSlots: _vm._u(
+              [
+                {
+                  key: "table-row",
+                  fn: function(props) {
+                    return [
+                      props.column.field == "action"
+                        ? _c("span", [
+                            _c("div", { staticClass: "dropdown" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "dropdown-toggle",
+                                  attrs: {
+                                    href: "#",
+                                    "data-toggle": "dropdown",
+                                    "aria-expanded": "false"
+                                  }
+                                },
+                                [
+                                  _c("span", {
+                                    staticClass:
+                                      "flaticon-more-button-of-three-dots"
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "dropdown-menu" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "dropdown-item",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.getAction(props.row, "edit")
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass:
+                                        "fas fa-cogs text-dark-pastel-green edit-button"
+                                    }),
+                                    _vm._v(
+                                      "\n                              Edit\n                          "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "dropdown-item",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.getAction(
+                                          props.row,
+                                          "delete"
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass:
+                                        "fas fa-trash text-orange-red edit-button"
+                                    }),
+                                    _vm._v(
+                                      "\n                              Delete\n                          "
+                                    )
+                                  ]
+                                )
+                              ])
+                            ])
+                          ])
+                        : _c("span", [
+                            _vm._v(
+                              "\n              " +
+                                _vm._s(props.formattedRow[props.column.field]) +
+                                "\n            "
+                            )
+                          ])
+                    ]
+                  }
+                }
+              ],
+              null,
+              false,
+              3004906077
+            )
+          }),
+          _vm._v(" "),
+          _vm.isModalActive
+            ? _c("employee-add-edit-modal", {
+                attrs: { "selected-url": _vm.selectedUrl },
+                on: { "close-modal": _vm.closeModal }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isConfirmationModal
+            ? _c("app-confirmation-modal", {
+                attrs: { "is-active": _vm.isConfirmationModal },
+                on: { confirm: _vm.confirmed, cancel: _vm.cancelled }
+              })
+            : _vm._e()
+        ],
+        1
+      )
+    : _vm._e()
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "col-xl-10 col-sm-10 col-md-10",
+        staticStyle: { float: "left", "padding-left": "0px" }
+      },
+      [
+        _c("h3", { staticClass: "header smaller lighter blue" }, [
+          _vm._v("Trash Employee List View")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "clearfix" }, [
