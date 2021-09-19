@@ -20,6 +20,7 @@ class CreateEmployeesTable extends Migration
             $table->string('image_path');
             $table->string('gender');
             $table->string('skills');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
