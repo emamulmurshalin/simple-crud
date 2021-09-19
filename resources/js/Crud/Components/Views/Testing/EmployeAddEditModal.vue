@@ -256,6 +256,7 @@ export default {
             this.axios.get(this.selectedUrl)
                 .then((response) => {
                     this.form = response.data;
+                    this.form.skills = response.data.skills.split(",");
                 }).catch((error) => {
 
             });

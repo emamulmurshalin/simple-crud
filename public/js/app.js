@@ -2411,6 +2411,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.axios.get(this.selectedUrl).then(function (response) {
         _this3.form = response.data;
+        _this3.form.skills = response.data.skills.split(",");
       })["catch"](function (error) {});
     }
   },
