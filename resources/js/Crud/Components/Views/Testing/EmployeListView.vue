@@ -90,7 +90,7 @@ export default {
                 {
                     label: 'Image',
                     field: 'image_path',
-                    type: 'file',
+                    type: 'image',
                     sortable: false
                 },
                 {

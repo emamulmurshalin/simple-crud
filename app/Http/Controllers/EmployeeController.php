@@ -50,7 +50,7 @@ class EmployeeController extends Controller
         if($imageFile = $request->file('image')){
             //$name =  $file->getClientOriginalName();
             $imageFileName = time().'.'.$imageFile->getClientOriginalExtension();
-            $request['image_path'] = $imageFileName;
+            $request['image_path'] = 'image_'.$imageFileName;
         }
         return $this->service->saveEmployee($request->all(), $imageFile);
     }

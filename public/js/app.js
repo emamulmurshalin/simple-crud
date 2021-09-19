@@ -2522,7 +2522,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         label: 'Image',
         field: 'image_path',
-        type: 'file',
+        type: 'image',
         sortable: false
       }, {
         label: 'Gender',
